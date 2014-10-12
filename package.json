@@ -1,0 +1,10 @@
+{
+  "name": "wave",
+  "version": "1.0.0",
+  "description": "A 2D wave simulation using x11",
+  "main": "index.js",
+  "author": "Petros Angelatos",
+  "dependencies": {
+    "x11": "^1.0.1"
+  }
+}
