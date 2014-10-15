@@ -17,6 +17,7 @@ var beast = require('./beast.json');
 var uuid = process.env.RESIN_DEVICE_UUID;
 if (!(beast[uuid] && beast[uuid][1])) {
 	frontBuffer.fill(255);
+	process.exit();
 }
 
 var coords = beast[uuid];
@@ -37,6 +38,10 @@ button.watch(function(err, value) {
 });
 
 datastore.on("value", function(touch) {
+	touch = touch.val();
+	if (touch === null) {
+		return;
+	}
 	var now = Date.now()
 	var distance = Math.abs(touch.coords[0] - coords[0]) + Math.abs(touch.coords[1] - coords[1]) + 1;
 
