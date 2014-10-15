@@ -8,7 +8,7 @@ RUN apt-get -q update && apt-get install -y openssh-server ntpdate && \
 	mv /node-v0.10.22-linux-arm-pi /nodejs && \
 	chmod +x /nodejs/bin/*
 
-RUN /nodejs/bin/npm install -g onoff
+RUN /nodejs/bin/npm install -g onoff firebase
 
 ADD . /app
 

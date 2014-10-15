@@ -8,4 +8,15 @@ modprobe fbtft_device name=pitft verbose=0 rotate=270
 
 export HOME=/root
 
-/nodejs/bin/node /app/index.js
+mkdir /app/node_modules
+mv /nodejs/lib/node_modules/onoff /app/node_modules
+mv /nodejs/lib/node_modules/firebase /app/node_modules
+
+ntpdate stratum2.ord2.publicntp.net
+
+/nodejs/bin/node /app/index.js &
+
+while true; do
+	ntpdate stratum2.ord2.publicntp.net
+	sleep 60
+done
