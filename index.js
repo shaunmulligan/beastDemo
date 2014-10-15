@@ -36,7 +36,7 @@ button.watch(function(err, value) {
 
 });
 
-myFirebaseRef.on("value", function(touch) {
+datastore.on("value", function(touch) {
 	var now = Date.now()
 	var distance = Math.abs(touch.coords[0] - coords[0]) + Math.abs(touch.coords[1] - coords[1]) + 1;
 
