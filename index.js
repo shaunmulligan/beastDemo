@@ -15,8 +15,9 @@ frontBuffer.fill(0);
 var beast = require('./beast.json');
 
 var uuid = process.env.RESIN_DEVICE_UUID;
-if (!(beast[uuid] && beast[uuid][1])) {
+if (!(beast[uuid] && typeof beast[uuid][1] === 'number')) {
 	frontBuffer.fill(255);
+	draw();
 	process.exit();
 }
 
@@ -43,9 +44,9 @@ datastore.on("value", function(touch) {
 		return;
 	}
 	var now = Date.now()
-	var distance = Math.abs(touch.coords[0] - coords[0]) + Math.abs(touch.coords[1] - coords[1]) + 1;
+	var distance = Math.abs(touch.coords[0] - coords[0]) + Math.abs(touch.coords[1] - coords[1]) + 2;
 
-	var eta = touch.time + 500 * distance;
+	var eta = touch.time + 200 * distance;
 	
 	// touch in the past
 	if (now > eta) {
