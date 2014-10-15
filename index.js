@@ -1,6 +1,6 @@
 var SCREEN_WIDTH = 320;
 var SCREEN_HEIGHT = 240;
-var IMAGE_FILE = "resin.jpg"
+var IMAGE_FILE = "/app/resin.jpg"
 
 var Firebase = require("firebase");
 var datastore = new Firebase("https://resin-ripple.firebaseio.com/");
