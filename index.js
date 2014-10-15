@@ -64,7 +64,7 @@ datastore.on("value", function(touch) {
 					frontBuffer[SCREEN_WIDTH * 2 * y + 2 * x + 1] = 0;
 				}
 			}
-		}, 100);
+		}, 300);
 	}, eta - now);
 });
 
