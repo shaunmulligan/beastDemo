@@ -1,8 +1,11 @@
 var SCREEN_WIDTH = 320;
 var SCREEN_HEIGHT = 240;
+var IMAGE_FILE = "resin.jpg"
 
 var Firebase = require("firebase");
 var datastore = new Firebase("https://resin-ripple.firebaseio.com/");
+
+var spawn = require('child_process').spawn;
 
 var fs = require('fs');
 var Gpio = require('onoff').Gpio;
@@ -17,11 +20,13 @@ var beast = require('./beast.json');
 var uuid = process.env.RESIN_DEVICE_UUID;
 if (!(beast[uuid] && typeof beast[uuid][1] === 'number')) {
 	frontBuffer.fill(255);
-	draw();
+	fs.writeFileSync("/dev/fb1", frontBuffer);
 	process.exit();
 }
 
 var coords = beast[uuid];
+
+spawn("fbi", "-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", IMAGE_FILE)
 
 prevEvent = Date.now()
 button.watch(function(err, value) {
@@ -59,21 +64,9 @@ datastore.on("value", function(touch) {
 				frontBuffer[SCREEN_WIDTH * 2 * y + 2 * x + 1] = 255;
 			}
 		}
+		fs.writeFileSync("/dev/fb1", frontBuffer);
 		setTimeout(function () {
-			for (var x = 0; x < SCREEN_WIDTH; x++ ) {
-				for (var y = 0; y < SCREEN_HEIGHT; y++) {
-					frontBuffer[SCREEN_WIDTH * 2 * y + 2 * x + 1] = 0;
-				}
-			}
+			spawn("fbi", "-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", IMAGE_FILE)
 		}, 400);
 	}, eta - now);
 });
-
-var FPS = 20;
-
-var draw = function () {
-	fs.writeFileSync("/dev/fb1", frontBuffer);
-	setTimeout(draw, 1000 / FPS);
-}
-
-draw();

@@ -10,6 +10,8 @@ RUN apt-get -q update && apt-get install -y openssh-server ntpdate && \
 
 RUN /nodejs/bin/npm install -g onoff firebase
 
+RUN apt-get install -y fbi
+
 ADD . /app
 
 ADD start.sh /start
