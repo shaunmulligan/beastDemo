@@ -26,7 +26,7 @@ if (!(beast[uuid] && typeof beast[uuid][1] === 'number')) {
 
 var coords = beast[uuid];
 
-spawn("fbi", "-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", IMAGE_FILE)
+spawn("fbi", ["-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", IMAGE_FILE])
 
 prevEvent = Date.now()
 button.watch(function(err, value) {
@@ -66,7 +66,7 @@ datastore.on("value", function(touch) {
 		}
 		fs.writeFileSync("/dev/fb1", frontBuffer);
 		setTimeout(function () {
-			spawn("fbi", "-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", IMAGE_FILE)
+			spawn("fbi", ["-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", IMAGE_FILE])
 		}, 400);
 	}, eta - now);
 });
