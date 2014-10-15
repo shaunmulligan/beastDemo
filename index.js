@@ -15,7 +15,7 @@ frontBuffer.fill(0);
 var beast = require('./beast.json');
 
 var uuid = process.env.RESIN_DEVICE_UUID;
-if ( !(beast[uuid] && beast[uuid][1]) {
+if (!(beast[uuid] && beast[uuid][1])) {
 	frontBuffer.fill(255);
 }
 
@@ -59,7 +59,7 @@ myFirebaseRef.on("value", function(touch) {
 					frontBuffer[SCREEN_WIDTH * 2 * y + 2 * x + 1] = 0;
 				}
 			}
-		}, 100;
+		}, 100);
 	}, eta - now);
 });
 
