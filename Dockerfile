@@ -1,11 +1,11 @@
 FROM resin/rpi-buildstep-armv6hf:production
 
-RUN apt-get -q update && apt-get install openssh-server ntpdate && \
+RUN apt-get -q update && apt-get install -y openssh-server ntpdate && \
     mkdir /var/run/sshd && \
     echo 'root:letmein' | chpasswd && \
     sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-	mkdir /nodejs && \
-	wget -O- -q http://nodejs.org/dist/v0.10.22/node-v0.10.22-linux-arm-pi.tar.gz | tar xz -C /nodejs && \
+	wget -O- -q http://nodejs.org/dist/v0.10.22/node-v0.10.22-linux-arm-pi.tar.gz | tar xz -C / && \
+	mv /node-v0.10.22-linux-arm-pi /nodejs && \
 	chmod +x /nodejs/bin/*
 
 RUN /nodejs/bin/npm install -g onoff
