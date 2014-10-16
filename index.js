@@ -1,6 +1,6 @@
 var SCREEN_WIDTH = 320;
 var SCREEN_HEIGHT = 240;
-var IMAGE_FILE = "/app/tea.jpg"
+var IMAGE_FILE = "/app/resin.jpg"
 var WAVE_IMAGE_FILE = "/app/union_jack.png"
 
 var Firebase = require("firebase");
