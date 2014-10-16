@@ -1,7 +1,7 @@
 var SCREEN_WIDTH = 320;
 var SCREEN_HEIGHT = 240;
 var IMAGE_FILE = "/app/resin.jpg"
-var WAVE_IMAGE_FILE = "/app/heroku.png"
+var WAVE_IMAGE_FILE = "/app/union_jack.png"
 
 var Firebase = require("firebase");
 var datastore = new Firebase("https://resin-ripple.firebaseio.com/");
