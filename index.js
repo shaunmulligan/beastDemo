@@ -1,6 +1,7 @@
 var SCREEN_WIDTH = 320;
 var SCREEN_HEIGHT = 240;
 var IMAGE_FILE = "/app/resin.jpg"
+var WAVE_IMAGE_FILE = "/app/nyan.jpg"
 
 var Firebase = require("firebase");
 var datastore = new Firebase("https://resin-ripple.firebaseio.com/");
@@ -59,12 +60,13 @@ datastore.on("value", function(touch) {
 	}
 
 	setTimeout(function () {
-		for (var x = 0; x < SCREEN_WIDTH; x++ ) {
-			for (var y = 0; y < SCREEN_HEIGHT; y++) {
-				frontBuffer[SCREEN_WIDTH * 2 * y + 2 * x + 1] = 255;
-			}
-		}
-		fs.writeFileSync("/dev/fb1", frontBuffer);
+		spawn("fbi", ["-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", WAVE_IMAGE_FILE])
+		// for (var x = 0; x < SCREEN_WIDTH; x++ ) {
+		// 	for (var y = 0; y < SCREEN_HEIGHT; y++) {
+		// 		frontBuffer[SCREEN_WIDTH * 2 * y + 2 * x + 1] = 255;
+		// 	}
+		// }
+		// fs.writeFileSync("/dev/fb1", frontBuffer);
 		setTimeout(function () {
 			spawn("fbi", ["-d", "/dev/fb1", "-T", "1", "-noverbose", "-a", IMAGE_FILE])
 		}, 400);
